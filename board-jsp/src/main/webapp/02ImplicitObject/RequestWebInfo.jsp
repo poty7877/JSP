@@ -8,17 +8,13 @@
 </head>
 <body>
 
-	<h2>1. RequestMain.jsp에서 넘어온 값 확인용</h2>
+	<h2>1.RequestMain.jsp에서 넘어온 값 확인용</h2>
 	<ul>
-		<!-- ul태그는 순서없는 리스트 번호 용 -->
-		<li> <!-- 리스트 출력용 -->
-		<%= request.getParameter("eng") %>
-		</li>
+		<li><%=request.getParameter("eng")%></li>
 		<hr>
-		
-		<li>
-		<%= request.getParameter("han") %>
-		</li>
+		<li><%=request.getAttribute("han")%></li> <!-- uft-8로 인코딩 필요 -->
+
+
 	</ul>
 
 </body>

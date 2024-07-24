@@ -6,16 +6,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>import.jsp(외부 패키지 연동)</title>
+<title>Import.jsp : 외부 패키지 연동</title>
 </head>
 <body>
+	<h2>날짜 확인</h2>
 	<%
-	Date today = new Date(); // 날짜용 객체 생성.
-	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); // 날짜 타입변환
-	String todaySTR = simpleDateFormat.format(today); // 적용해서 변수에 넣음.
-	out.println("오늘 날짜 : " + todaySTR);
+	Date today = new Date();
+	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	String todayStr = simpleDateFormat.format(today);
+	out.print("오늘 날짜 : " + todayStr);
 	%>
-	<!-- 스크립틀릿 ㅣ 자바의 원시코드 -->
 
 </body>
 </html>
