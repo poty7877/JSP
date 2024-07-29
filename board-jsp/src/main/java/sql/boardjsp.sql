@@ -53,3 +53,7 @@ select * from board;
 
 SELECT * FROM MEMBER WHERE ID ='kkw' AND PASS='1234';
 
+select count(*) from board where title like '%제목%';
+SELECT B.*, M.* FROM MEMBER M INNER JOIN BOARD B ON M.ID = B.ID WHERE NUM = 2;
+UPDATE BOARD SET VISITCOUNT = VISITCOUNT + 1 WHERE NUM = 2;
+

@@ -7,7 +7,7 @@
 <title>LoginForm.jsp : 로그인 창 (성공-> 세션에저장 //)</title>
 </head>
 <body>
-	<%-- 	<jsp:include page="../Common/Link.jsp"/> --%>
+	<jsp:include page="../Common/Link.jsp" />
 	<h2>로그인 페이지</h2>
 	<span style="color: red; font-size: 1.2em;"> <%=request.getAttribute("LoginErrMsg") == null ? "" : request.getAttribute("LoginErrMsg")%>
 		<!-- 조건 : request영역에 "LoginErrMsg"가 있니 ? true : false -->
@@ -30,19 +30,22 @@
 		}
 	</script>
 	<form action="LoginProcess.jsp" method="post" name="loginFrm"
-		onsubmit="return validateForm(this);"> <!-- onsubmit값에 return이 true이가 나와야 action으로 진행. false이면 뒤로 -->
-		아이디 : <input type="text" name="user_id" /><br> 패스워드 : <input
+		onsubmit="return validateForm(this);">
+		<!-- onsubmit값에 return이 true이가 나와야 action으로 진행. false이면 뒤로 -->
+		아이디 : <input type="text"name="user_id"/><br> 패스워드 : <input
 			type="password" name="user_pw" /><br> <input type="submit"
-			value="로그인하기" /> <!-- 1순위 : onsubmit -> 2순위 : action -> -->
+			value="로그인하기" />
+		<!-- 1순위 : onsubmit -> 2순위 : action -> -->
 	</form>
 	<%
 	} else { // 로그인 된 상태
 	%>
 	<%=session.getAttribute("UserName")%>
-	<%=session.getAttribute("UserId") %>
+	<%=session.getAttribute("UserId")%>
 	회원님, 로그인하셨습니다.
 	<br>
-	<a href="Logout.jsp">[로그아웃]</a> <!-- 세션제거 -->
+	<a href="Logout.jsp">[로그아웃]</a>
+	<!-- 세션제거 -->
 	<%
 	}
 	%>
