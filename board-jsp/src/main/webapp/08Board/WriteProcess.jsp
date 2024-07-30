@@ -19,6 +19,11 @@ boardDTO.setId(session.getAttribute("UserId").toString()); // 세션영역에 �
 
 BoardDAO boardDAO = new BoardDAO(application); // application 빼먹지 않도록 주의. 1,2단계
 int result = boardDAO.insertWrite(boardDTO); // 3,4단계 적용
+/* int result = 0;
+for (int i = 1; i <= 100; i++) { // 글쓰기 1번에 100개 저장
+	boardDTO.setTitle(title + "-" + i);
+	result = boardDAO.insertWrite(boardDTO);
+} */
 boardDAO.close(); // 5단계
 
 if (result > 0) { // INSERT 결과값이 1이면 성공

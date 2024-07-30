@@ -51,9 +51,10 @@ public class BoardDAO extends JDBConnect {
 
 	// 게시물의 리스트 출력
 	public List<BoardDTO> selectList(Map<String, Object> map) {
-		List<BoardDTO> listBoardDTO = new Vector<BoardDTO>();
+		// param -> searchField, searchWord, start, end 전달
+		List<BoardDTO> listBoardDTO = new Vector<BoardDTO>(); // vector = 멀티스레드용
 
-		String sql = "SELECT * FROM BOARD";
+		String sql = "SELECT * FROM ( SELECT TB.*, ROWNUM RNUM FROM ( SELECT * FROM BOARD ";
 		// 조건 추가
 		if (map.get("searchWord") != null) { // 검색어가 있으면
 			sql += " WHERE " + map.get("searchField") + " LIKE '%" + map.get("searchWord") + "%'";
@@ -62,13 +63,15 @@ public class BoardDAO extends JDBConnect {
 			// select count(*) from baord where 제목 like ' %딸기%(Object) ';
 		} // 검색어가 있으면 조건이 추가된다.
 			// 정렬 추가
-		sql += " ORDER BY NUM DESC";
+		sql += " ORDER BY NUM DESC) TB ) WHERE RNUM BETWEEN ? AND ? ";
 		// 3단계 쿼리문 완성
-
+		
 		// 4단계 : 쿼리문 실행
 		try {
-			statement = connection.createStatement(); // 쿼리문 생성
-			resultSet = statement.executeQuery(sql); // 쿼리문 실행하여 결과를 표로 받음
+			preparedStatement = connection.prepareStatement(sql); // 3단계 
+			preparedStatement.setString(1, map.get("start").toString()); // 시작번호
+			preparedStatement.setString(2, map.get("end").toString());	// 마지막번호
+			resultSet = preparedStatement.executeQuery(); // 4단계
 
 			while (resultSet.next()) {
 				BoardDTO boardDTO = new BoardDTO(); // 빈 객체 생성
