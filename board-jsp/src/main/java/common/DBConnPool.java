@@ -1,6 +1,5 @@
 package common;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,10 +13,10 @@ import javax.sql.DataSource;
 public class DBConnPool {
 	// 커넥션 풀은 미리 커넥션 객체를 생성해주고 접속하면 제공 후 반납을 받는다.
 	// 필드
-	public Connection con; // 데이터베이스 연결
-	public Statement stmt; // 인파라미터가 없는 sql문 담당
-	public PreparedStatement pstmt; // 인파라미터가 있는 동적 쿼리문 담당
-	public ResultSet rs; // select로 나온 결과값을 표형식으로 출력 담당
+	public Connection connection; // 데이터베이스 연결
+	public Statement statement; // 인파라미터가 없는 sql문 담당
+	public PreparedStatement preparedStatement; // 인파라미터가 있는 동적 쿼리문 담당
+	public ResultSet resultSet; // select로 나온 결과값을 표형식으로 출력 담당
 
 	// 생성자
 	public DBConnPool() {
@@ -36,7 +35,7 @@ public class DBConnPool {
 			// 전역 자원에 설정한 이름을 이용해서 데이터 소스객체로 얻어옴
 
 			// 커넥션 풀을 통해 연결 얻기
-			con = source.getConnection();
+			connection = source.getConnection();
 
 			System.out.println("DB 커넥션 풀 연결 성공");
 		} catch (Exception e) {
@@ -50,20 +49,20 @@ public class DBConnPool {
 	public void close() {
 
 		try {
-			if (rs != null) {
-				rs.close();
+			if (resultSet != null) {
+				resultSet.close();
 				System.out.println("ResultSet 종료 성공");
 			}
-			if (stmt != null) {
-				stmt.close();
+			if (statement != null) {
+				statement.close();
 				System.out.println("Statement 종료 성공");
 			}
-			if (pstmt != null) {
-				pstmt.close();
+			if (preparedStatement != null) {
+				preparedStatement.close();
 				System.out.println("PreparedStatement 종료 성공");
 			}
-			if (con != null) {
-				con.close();
+			if (connection != null) {
+				connection.close();
 				System.out.println("Connention 종료 성공");
 			}
 
